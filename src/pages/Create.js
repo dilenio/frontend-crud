@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import CurrencyInput from 'react-currency-input-field';
-import axios from 'axios';
 import loadingIcon from '../assets/loading.gif';
+import { Link } from 'react-router-dom';
+import { apiCreate, apiList } from '../services/API';
 
 const Create = () => {
   const [quantity, setQuantity] = useState('');
@@ -33,11 +34,7 @@ const Create = () => {
       },
     };
 
-    await axios({
-      method: 'post',
-      url: 'https://crudcrud.com/api/32dd51cce83b4f8b8c4a25e08a563db2/stock',
-      data,
-    });
+    await apiCreate(data);
 
     resetFieldValues();
     setLoading(false);
@@ -117,6 +114,7 @@ const Create = () => {
         </div>
         <div>
           <button onClick={handleClick}>Save</button>
+          <Link to="/">Cancel</Link>
         </div>
       </div>
     </div>
