@@ -10,7 +10,7 @@ const Provider = ({ children }) => {
   const [client, setClient] = useState('');
   const [active, setActive] = useState(true);
   const [edit, setEdit] = useState('');
-  const [currency, setCurrency] = useState('R$ ');
+  const [currency, setCurrency] = useState('$ ');
 
   const context = {
     name,

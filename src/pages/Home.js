@@ -1,14 +1,17 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 import { apiGetList, apiDelete } from '../services/API';
+import loadingIcon from '../assets/loading.gif';
 
 const Home = () => {
   const { data, setData, setEdit, currency } = useContext(Context);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     apiGetList().then((items) => {
       setData(items.data);
+      setLoading(false);
     });
   }, [setData]);
 
@@ -17,6 +20,14 @@ const Home = () => {
     apiGetList().then((items) => {
       setData(items.data);
     });
+  };
+
+  const renderLoading = () => {
+    return (
+      <div>
+        <img src={loadingIcon} alt="loading..." />
+      </div>
+    );
   };
 
   const renderDataTable = (element) => {
@@ -45,6 +56,7 @@ const Home = () => {
   return (
     <div>
       <Link to="/create-edit">Add new</Link>
+      {loading && renderLoading()}
       <div>
         {data.length > 0 ? (
           <table>

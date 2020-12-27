@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import Context from '../context/Context';
 import CurrencyInput from 'react-currency-input-field';
 import loadingIcon from '../assets/loading.gif';
-import { Link } from 'react-router-dom';
 import { apiCreate, apiGetById, apiUpdate } from '../services/API';
 
 const CreateEdit = (props) => {
@@ -68,6 +67,11 @@ const CreateEdit = (props) => {
 
     resetFieldValues();
     setLoading(false);
+    props.history.push('/');
+  };
+
+  const handleCancel = () => {
+    resetFieldValues();
     props.history.push('/');
   };
 
@@ -144,7 +148,7 @@ const CreateEdit = (props) => {
         </div>
         <div>
           <button onClick={handleClick}>Save</button>
-          <Link to="/">Cancel</Link>
+          <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
     </div>
