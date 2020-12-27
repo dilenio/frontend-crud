@@ -43,11 +43,11 @@ export const apiUpdate = async (data) => {
   });
 };
 
-export const apiDelete = async (data) => {
+export const apiDelete = async (id) => {
   await axios({
     method: 'delete',
     headers: { 'Content-Type': 'application/json' },
-    url: `${URL_API}/${data.id}`,
+    url: `${URL_API}/${id}`,
   });
 };
 

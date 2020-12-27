@@ -81,7 +81,7 @@ const CreateEdit = (props) => {
 
   return (
     <div>
-      <h2>Create an stock item</h2>
+      <h2>{edit ? 'Update' : 'Create'} an stock item</h2>
       {loading && renderLoading()}
       <div>
         <div>

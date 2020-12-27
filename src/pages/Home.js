@@ -12,6 +12,13 @@ const Home = () => {
     });
   }, [setData]);
 
+  const handleDelete = async (id) => {
+    await apiDelete(id);
+    apiGetList().then((items) => {
+      setData(items.data);
+    });
+  };
+
   const renderDataTable = (element) => {
     return (
       <tr key={element._id}>
@@ -22,12 +29,12 @@ const Home = () => {
         </td>
         <td>{element.product.name}</td>
         <td>{element.client.name}</td>
-        <td>{element.active}</td>
+        <td>{element.active ? 'Yes' : 'No'}</td>
         <td>
           <Link to="/create-edit" onClick={() => setEdit(element._id)}>
             Select
           </Link>
-          <Link to="/" onClick={async () => await apiDelete(element._id)}>
+          <Link to="/" onClick={() => handleDelete(element._id)}>
             Delete
           </Link>
         </td>
