@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../context/Context';
-import apiGetList from '../services/API';
+import { apiGetList, apiDelete } from '../services/API';
 
 const Home = () => {
-  const { data, setData } = useContext(Context);
+  const { data, setData, setEdit, currency } = useContext(Context);
 
   useEffect(() => {
     apiGetList().then((items) => {
@@ -17,13 +17,19 @@ const Home = () => {
       <tr key={element._id}>
         <td>{element._id}</td>
         <td>{element.quantity}</td>
-        <td>$ {element.price}</td>
+        <td>
+          {currency} {element.price}
+        </td>
         <td>{element.product.name}</td>
         <td>{element.client.name}</td>
         <td>{element.active}</td>
         <td>
-          <Link to="/create">Select</Link>
-          <button>Delete</button>
+          <Link to="/create-edit" onClick={() => setEdit(element._id)}>
+            Select
+          </Link>
+          <Link to="/" onClick={async () => await apiDelete(element._id)}>
+            Delete
+          </Link>
         </td>
       </tr>
     );
@@ -31,7 +37,7 @@ const Home = () => {
 
   return (
     <div>
-      <Link to="/create">Add new</Link>
+      <Link to="/create-edit">Add new</Link>
       <div>
         {data.length > 0 ? (
           <table>

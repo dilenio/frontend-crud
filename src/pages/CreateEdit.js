@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Context from '../context/Context';
 import CurrencyInput from 'react-currency-input-field';
 import loadingIcon from '../assets/loading.gif';
 import { Link } from 'react-router-dom';
-import { apiCreate } from '../services/API';
+import { apiCreate, apiGetById, apiUpdate } from '../services/API';
 
-const CreateEdit = () => {
+const CreateEdit = (props) => {
   const {
     quantity,
     setQuantity,
@@ -17,8 +17,24 @@ const CreateEdit = () => {
     setClient,
     active,
     setActive,
+    edit,
+    setEdit,
+    currency,
   } = useContext(Context);
+
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (edit !== '') {
+      apiGetById(edit).then((item) => {
+        setQuantity(item.quantity);
+        setPrice(item.price);
+        setProduct(item.product.name);
+        setClient(item.client.name);
+        setActive(item.active);
+      });
+    }
+  }, [edit, setQuantity, setPrice, setProduct, setClient, setActive]);
 
   const resetFieldValues = () => {
     setQuantity('');
@@ -26,6 +42,7 @@ const CreateEdit = () => {
     setProduct('');
     setClient('');
     setActive(true);
+    setEdit('');
   };
 
   const handleClick = async () => {
@@ -42,10 +59,16 @@ const CreateEdit = () => {
       },
     };
 
-    await apiCreate(data);
+    if (edit !== '') {
+      data.id = edit;
+      await apiUpdate(data);
+    } else {
+      await apiCreate(data);
+    }
 
     resetFieldValues();
     setLoading(false);
+    props.history.push('/');
   };
 
   const renderLoading = () => {
@@ -77,8 +100,7 @@ const CreateEdit = () => {
             Price
             <CurrencyInput
               id="price"
-              prefix="$ "
-              // placeholder="$ 1,000"
+              prefix={currency}
               defaultValue={price}
               value={price}
               allowDecimals={true}

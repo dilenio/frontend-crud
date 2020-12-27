@@ -9,6 +9,8 @@ const Provider = ({ children }) => {
   const [product, setProduct] = useState('');
   const [client, setClient] = useState('');
   const [active, setActive] = useState(true);
+  const [edit, setEdit] = useState('');
+  const [currency, setCurrency] = useState('R$ ');
 
   const context = {
     name,
@@ -25,6 +27,10 @@ const Provider = ({ children }) => {
     setClient,
     active,
     setActive,
+    edit,
+    setEdit,
+    currency,
+    setCurrency,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;
