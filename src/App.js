@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Provider from './context/Provider';
+import Header from './components/Header';
+import Home from './pages/Home';
+import CreateEdit from './pages/CreateEdit';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider>
+      <BrowserRouter>
+        <div className="container mx-auto px-4">
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/create-edit" component={CreateEdit} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
