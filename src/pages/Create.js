@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import Context from '../context/Context';
 import CurrencyInput from 'react-currency-input-field';
 import loadingIcon from '../assets/loading.gif';
 import { Link } from 'react-router-dom';
-import { apiCreate, apiList } from '../services/API';
+import { apiCreate } from '../services/API';
 
-const Create = () => {
-  const [quantity, setQuantity] = useState('');
-  const [price, setPrice] = useState('');
-  const [product, setProduct] = useState('');
-  const [client, setClient] = useState('');
-  const [active, setActive] = useState(true);
+const CreateEdit = () => {
+  const {
+    quantity,
+    setQuantity,
+    price,
+    setPrice,
+    product,
+    setProduct,
+    client,
+    setClient,
+    active,
+    setActive,
+  } = useContext(Context);
   const [loading, setLoading] = useState(false);
 
   const resetFieldValues = () => {
@@ -121,4 +129,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default CreateEdit;
