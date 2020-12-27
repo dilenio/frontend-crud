@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL_API = 'https://crudcrud.com/api/a47b7026695e4620aa13511b1a2c9aa9';
+const URL_API = 'https://crudcrud.com/api/fa2f016933a14f88bef98f0b7445fb63';
 const ENDPOINT = '/abmstock';
 
 export const apiGetList = async () => {

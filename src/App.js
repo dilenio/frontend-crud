@@ -8,11 +8,13 @@ function App() {
   return (
     <Provider>
       <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/create-edit" component={CreateEdit} />
-        </Switch>
+        <div className="container mx-auto px-4">
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/create-edit" component={CreateEdit} />
+          </Switch>
+        </div>
       </BrowserRouter>
     </Provider>
   );

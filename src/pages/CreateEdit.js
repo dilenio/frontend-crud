@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Context from '../context/Context';
 import CurrencyInput from 'react-currency-input-field';
-import loadingIcon from '../assets/loading.gif';
 import { apiCreate, apiGetById, apiUpdate } from '../services/API';
 
 const CreateEdit = (props) => {
@@ -78,45 +77,62 @@ const CreateEdit = (props) => {
   const renderLoading = () => {
     return (
       <div>
-        <img src={loadingIcon} alt="loading..." />
+        <p>Loading...</p>
       </div>
     );
   };
 
   return (
-    <div>
-      <h2>{edit ? 'Update' : 'Create'} an stock item</h2>
+    <div className="container">
+      <h2 className="text-xl font-semibold my-4">
+        {edit ? 'Update' : 'Create'} an stock item
+      </h2>
       {loading && renderLoading()}
-      <div>
-        <div>
-          <label htmlFor="quantity">
-            Quantity
-            <input
-              type="number"
-              id="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            />
-          </label>
+      <div className="mt-6">
+        <div className="flex justify-between gap-3">
+          <span class="w-1/2">
+            <label
+              htmlFor="quantity"
+              className="block text-xs font-semibold text-gray-600 uppercase"
+            >
+              Quantity
+              <input
+                className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+                type="number"
+                id="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                required
+              />
+            </label>
+          </span>
+          <span class="w-1/2">
+            <label
+              htmlFor="price"
+              className="block text-xs font-semibold text-gray-600 uppercase"
+            >
+              Price
+              <CurrencyInput
+                className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+                id="price"
+                prefix={currency}
+                defaultValue={price}
+                value={price}
+                allowDecimals={true}
+                decimalsLimit={2}
+                onChange={(value) => setPrice(value)}
+              />
+            </label>
+          </span>
         </div>
         <div>
-          <label htmlFor="price">
-            Price
-            <CurrencyInput
-              id="price"
-              prefix={currency}
-              defaultValue={price}
-              value={price}
-              allowDecimals={true}
-              decimalsLimit={2}
-              onChange={(value) => setPrice(value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="product">
+          <label
+            htmlFor="product"
+            className="block text-xs font-semibold text-gray-600 uppercase my-4"
+          >
             Product
             <input
+              className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               type="text"
               id="product"
               value={product}
@@ -125,9 +141,13 @@ const CreateEdit = (props) => {
           </label>
         </div>
         <div>
-          <label htmlFor="client">
+          <label
+            htmlFor="client"
+            className="block text-xs font-semibold text-gray-600 uppercase my-4"
+          >
             Client
             <input
+              className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               type="text"
               id="client"
               value={client}
@@ -135,20 +155,34 @@ const CreateEdit = (props) => {
             />
           </label>
         </div>
-        <div>
-          <label htmlFor="active">
-            Active
+        <div className="">
+          <label
+            htmlFor="active"
+            className="block text-xs font-semibold text-gray-600 uppercase my-4"
+          >
             <input
+              className="m-3"
               type="checkbox"
               id="active"
               checked={active}
               onChange={(e) => setActive(e.target.checked)}
             />
+            Active
           </label>
         </div>
         <div>
-          <button onClick={handleClick}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+          <button
+            onClick={handleClick}
+            className="bg-white text-black px-10 py-2 border rounded-md hover:bg-red-500 border-red-500 hover:text-white"
+          >
+            Save
+          </button>
+          <button
+            onClick={handleCancel}
+            className="bg-white text-black px-8 py-2 border rounded-md hover:bg-yellow-500 border-yellow-500 hover:text-white mx-2"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>
