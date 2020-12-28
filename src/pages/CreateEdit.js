@@ -90,7 +90,7 @@ const CreateEdit = (props) => {
       {loading && renderLoading()}
       <div className="mt-6">
         <div className="flex justify-between gap-3">
-          <span class="w-1/2">
+          <span className="w-1/2">
             <label
               htmlFor="quantity"
               className="block text-xs font-semibold text-gray-600 uppercase"
@@ -106,7 +106,7 @@ const CreateEdit = (props) => {
               />
             </label>
           </span>
-          <span class="w-1/2">
+          <span className="w-1/2">
             <label
               htmlFor="price"
               className="block text-xs font-semibold text-gray-600 uppercase"
